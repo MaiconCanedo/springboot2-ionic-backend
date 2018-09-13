@@ -10,3 +10,4 @@ public class CursomcApplication {
         SpringApplication.run(CursomcApplication.class, args);
     }
 }
+
