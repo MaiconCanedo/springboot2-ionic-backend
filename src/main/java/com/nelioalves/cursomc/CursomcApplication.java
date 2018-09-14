@@ -1,8 +1,12 @@
 package com.nelioalves.cursomc;
 
 import com.nelioalves.cursomc.domain.Categoria;
+import com.nelioalves.cursomc.domain.Cidade;
+import com.nelioalves.cursomc.domain.Estado;
 import com.nelioalves.cursomc.domain.Produto;
 import com.nelioalves.cursomc.repositories.CategoriaRepository;
+import com.nelioalves.cursomc.repositories.CidadeRepository;
+import com.nelioalves.cursomc.repositories.EstadoRepository;
 import com.nelioalves.cursomc.repositories.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -18,6 +22,10 @@ public class CursomcApplication implements CommandLineRunner {
     private CategoriaRepository categoriaRepository;
     @Autowired
     private ProdutoRepository produtoRepository;
+    @Autowired
+    private EstadoRepository estadoRepository;
+    @Autowired
+    private CidadeRepository cidadeRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(CursomcApplication.class, args);
@@ -39,9 +47,21 @@ public class CursomcApplication implements CommandLineRunner {
         produto2.getCategorias().addAll(Arrays.asList(categoria1, categoria2));
         produto3.getCategorias().addAll(Arrays.asList(categoria1));
 
-
         categoriaRepository.saveAll(Arrays.asList(categoria1, categoria2));
         produtoRepository.saveAll(Arrays.asList(produto1, produto2, produto3));
+
+        Estado estado1 = new Estado("Minas Gerais");
+        Estado estado2 = new Estado("São Paulo");
+
+        Cidade cidade1 = new Cidade("Uberlândia", estado1);
+        Cidade cidade2 = new Cidade("São Paulo", estado2);
+        Cidade cidade3 = new Cidade("Campinas", estado2);
+
+        estado1.getCidades().add(cidade1);
+        estado2.getCidades().addAll(Arrays.asList(cidade2, cidade3));
+
+        estadoRepository.saveAll(Arrays.asList(estado1, estado2));
+        cidadeRepository.saveAll(Arrays.asList(cidade1, cidade2, cidade3));
     }
 }
 
