@@ -1,4 +1,4 @@
-package com.nelioalves.cursomc.resources.exceptions;
+package com.nelioalves.cursomc.resources;
 
 import com.nelioalves.cursomc.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;

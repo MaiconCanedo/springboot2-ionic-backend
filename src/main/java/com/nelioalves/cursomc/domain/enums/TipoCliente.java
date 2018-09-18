@@ -3,7 +3,7 @@ package com.nelioalves.cursomc.domain.enums;
 public enum TipoCliente {
 
     PESSOA_FISICA(1, "Pessoa Física"),
-    PESSOA_JURIDICA(1, "Pessoa Jurídica");
+    PESSOA_JURIDICA(2, "Pessoa Jurídica");
 
     private Integer codigo;
     private String descricao;
@@ -20,7 +20,7 @@ public enum TipoCliente {
             if (tipoCliente.codigo.equals(codigo)) return tipoCliente;
         }
 
-        throw new IllegalArgumentException("codigo inválido: " + codigo);
+        throw new IllegalArgumentException("Código inválido: " + codigo);
     }
 
     public Integer getCodigo() {
