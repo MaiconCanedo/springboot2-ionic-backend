@@ -29,4 +29,9 @@ public class CategoriaService {
         if (categorias.getContent().size() == 0) throw new ObjectNotFoundException("Nenhum objeto foi encontrado! Tipo: " + Categoria.class.getName());
         return categorias;
     }
+
+    public Categoria insert(Categoria categoria) {
+        categoria.setId(null);
+        return repository.save(categoria);
+    }
 }
