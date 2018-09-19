@@ -18,12 +18,12 @@ public class ClienteService {
     @Autowired
     private ClienteRepository repository;
 
-    public Cliente buscar(Integer id) {
+    public Cliente find(Integer id) {
         Optional<Cliente> cliente = repository.findById(id);
         return cliente.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! id: " + id + ", Tipo: " + Cliente.class.getName()));
     }
 
-    public Page<Cliente> listar(Integer page) {
+    public Page<Cliente> findAll(Integer page) {
         Pageable pageable = PageRequest.of(page, 100, Sort.Direction.ASC, "nome");
         Page<Cliente> clientes = repository.findAll(pageable);
         if (clientes.getContent().size() == 0) throw new ObjectNotFoundException("Nenhum objeto foi encontrado! Tipo: " + Cliente.class.getName());

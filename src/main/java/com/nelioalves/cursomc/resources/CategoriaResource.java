@@ -3,6 +3,7 @@ package com.nelioalves.cursomc.resources;
 import com.nelioalves.cursomc.domain.Categoria;
 import com.nelioalves.cursomc.services.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -17,13 +18,13 @@ public class CategoriaResource {
     private CategoriaService service;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<?> find(@PathVariable Integer id) {
-        return ResponseEntity.ok().body(service.buscar(id));
+    public ResponseEntity<Categoria> find(@PathVariable Integer id) {
+        return ResponseEntity.ok().body(service.find(id));
     }
 
     @RequestMapping(value = "/page/{page}", method = RequestMethod.GET)
-    public ResponseEntity<?> findAll(@PathVariable Integer page){
-        return ResponseEntity.ok().body(service.listar(page));
+    public ResponseEntity<Page<Categoria>> findAll(@PathVariable Integer page){
+        return ResponseEntity.ok().body(service.findAll(page));
     }
 
     @RequestMapping(method = RequestMethod.POST)
@@ -31,5 +32,12 @@ public class CategoriaResource {
         categoria = service.insert(categoria);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(categoria.getId()).toUri();
         return ResponseEntity.created(uri).build();
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<Void> update(@RequestBody Categoria categoria, @PathVariable Integer id) {
+        categoria.setId(id);
+        categoria = service.update(categoria);
+        return ResponseEntity.noContent().build();
     }
 }
