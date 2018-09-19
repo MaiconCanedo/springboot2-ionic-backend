@@ -1,6 +1,7 @@
 package com.nelioalves.cursomc.services;
 
 import com.nelioalves.cursomc.domain.Categoria;
+import com.nelioalves.cursomc.dto.CategoriaDTO;
 import com.nelioalves.cursomc.repositories.CategoriaRepository;
 import com.nelioalves.cursomc.services.exceptions.DataIntegrityException;
 import com.nelioalves.cursomc.services.exceptions.ObjectNotFoundException;
@@ -12,7 +13,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CategoriaService {
@@ -30,6 +33,12 @@ public class CategoriaService {
         Page<Categoria> categorias = repository.findAll(pageable);
         if (categorias.getContent().size() == 0) throw new ObjectNotFoundException("Nenhum objeto foi encontrado! Tipo: " + Categoria.class.getName());
         return categorias;
+    }
+
+    public List<CategoriaDTO> findAll() {
+        List<Categoria> categorias =  repository.findAll();
+        if (categorias.size() == 0) throw new ObjectNotFoundException("Nenhum objeto foi encontrado! Tipo: " + Categoria.class.getName());
+        return categorias.stream().map(categoria -> new CategoriaDTO(categoria)).collect(Collectors.toList());
     }
 
     public Categoria insert(Categoria categoria) {
