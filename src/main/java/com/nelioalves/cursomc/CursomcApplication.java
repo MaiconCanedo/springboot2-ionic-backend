@@ -42,6 +42,11 @@ public class CursomcApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         Categoria categoria1 = new Categoria("Informática");
         Categoria categoria2 = new Categoria("Escritório");
+        Categoria categoria3 = new Categoria("Cama mesa e banho");
+        Categoria categoria4 = new Categoria("Eletrônicos");
+        Categoria categoria5 = new Categoria("Jardinagem");
+        Categoria categoria6 = new Categoria("Decoração");
+        Categoria categoria7 = new Categoria("Perfumaria");
 
         Produto produto1 = new Produto("Computador", 2_000.0);
         Produto produto2 = new Produto("Impressora", 800.0);
@@ -54,7 +59,7 @@ public class CursomcApplication implements CommandLineRunner {
         produto2.getCategorias().addAll(Arrays.asList(categoria1, categoria2));
         produto3.getCategorias().addAll(Arrays.asList(categoria1));
 
-        categoriaRepository.saveAll(Arrays.asList(categoria1, categoria2));
+        categoriaRepository.saveAll(Arrays.asList(categoria1, categoria2, categoria3, categoria4, categoria5, categoria6, categoria7));
         produtoRepository.saveAll(Arrays.asList(produto1, produto2, produto3));
 
         Estado estado1 = new Estado("Minas Gerais");
