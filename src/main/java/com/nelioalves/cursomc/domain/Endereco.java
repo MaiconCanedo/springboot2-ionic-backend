@@ -2,6 +2,7 @@ package com.nelioalves.cursomc.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.nelioalves.cursomc.dto.ClienteNewDTO;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,7 +12,7 @@ import java.util.Objects;
 public class Endereco implements Serializable {
 
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String logradouro;
     private String numero;
@@ -19,7 +20,7 @@ public class Endereco implements Serializable {
     private String bairro;
     private String cep;
 
-//    @JsonBackReference
+    //    @JsonBackReference
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "cliente_id")
@@ -29,7 +30,8 @@ public class Endereco implements Serializable {
     @JoinColumn(name = "cidade_id")
     private Cidade cidade;
 
-    public Endereco() {}
+    public Endereco() {
+    }
 
     public Endereco(Integer id, String logradouro, String numero, String complemento, String bairro, String cep, Cliente cliente, Cidade cidade) {
         this(logradouro, numero, complemento, bairro, cep, cliente, cidade);
@@ -44,6 +46,10 @@ public class Endereco implements Serializable {
         this.cep = cep;
         this.cliente = cliente;
         this.cidade = cidade;
+    }
+
+    public Endereco(ClienteNewDTO clienteNewDTO, Cliente cliente) {
+        this(clienteNewDTO.getLogradouro(), clienteNewDTO.getNumero(), clienteNewDTO.getComplemento(), clienteNewDTO.getBairro(), clienteNewDTO.getCep(), cliente, new Cidade(clienteNewDTO.getCidadeId()));
     }
 
     @Override
