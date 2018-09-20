@@ -47,7 +47,8 @@ public class CategoriaService {
     }
 
     public Categoria update(Categoria categoria) {
-        find(categoria.getId());
+        Categoria newCategoria = find(categoria.getId());
+        updateData(newCategoria, categoria);
         return repository.save(categoria);
     }
 
@@ -56,11 +57,15 @@ public class CategoriaService {
         try {
             repository.deleteById(id);
         } catch (DataIntegrityViolationException e) {
-            throw new DataIntegrityException("Não é possível excluir uma catagoria que possui produtos! ");
+            throw new DataIntegrityException("Não é possível excluir uma categoria que possui produtos! ");
         }
     }
 
     public Categoria fromDTO(CategoriaDTO categoriaDTO) {
         return new Categoria(categoriaDTO);
+    }
+
+    private void updateData(Categoria newCategoria, Categoria categoria) {
+        newCategoria.setNome(categoria.getNome());
     }
 }
