@@ -22,12 +22,12 @@ public class CategoriaResource {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Categoria> find(@PathVariable Integer id) {
-        return ResponseEntity.ok().body(service.find(id));
+        return ResponseEntity.ok(service.find(id));
     }
 
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<CategoriaDTO>> findAll() {
-        return ResponseEntity.ok().body(service.findAll());
+        return ResponseEntity.ok(service.findAll());
     }
 
     @RequestMapping(value = "/page", method = RequestMethod.GET)
@@ -35,7 +35,7 @@ public class CategoriaResource {
                                                     @RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
                                                     @RequestParam(value = "orderBy", defaultValue = "nome") String orderBy,
                                                     @RequestParam(value = "direction", defaultValue = "ASC") String direction) {
-        return ResponseEntity.ok().body(service.findPage(page, linesPerPage, orderBy, direction));
+        return ResponseEntity.ok(service.findPage(page, linesPerPage, orderBy, direction));
     }
 
     @RequestMapping(method = RequestMethod.POST)

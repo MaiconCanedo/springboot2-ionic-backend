@@ -56,11 +56,11 @@ public class CategoriaService {
         try {
             repository.deleteById(id);
         } catch (DataIntegrityViolationException e) {
-            throw new DataIntegrityException("Não é possível excluir uma catagoria que possui produtos! " + e.getClass().getName());
+            throw new DataIntegrityException("Não é possível excluir uma catagoria que possui produtos! ");
         }
     }
 
     public Categoria fromDTO(CategoriaDTO categoriaDTO) {
-        return new Categoria(categoriaDTO.getId(), categoriaDTO.getNome());
+        return new Categoria(categoriaDTO);
     }
 }
