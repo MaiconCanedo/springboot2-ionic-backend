@@ -59,4 +59,8 @@ public class CategoriaService {
             throw new DataIntegrityException("Não é possível excluir uma catagoria que possui produtos! " + e.getClass().getName());
         }
     }
+
+    public Categoria fromDTO(CategoriaDTO categoriaDTO) {
+        return new Categoria(categoriaDTO.getId(), categoriaDTO.getNome());
+    }
 }
