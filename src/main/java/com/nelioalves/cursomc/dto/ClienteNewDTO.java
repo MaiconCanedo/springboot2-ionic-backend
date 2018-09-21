@@ -14,12 +14,11 @@ public class ClienteNewDTO implements Serializable {
     private String complemento;
     private String bairro;
     private String cep;
+    private Integer cidadeId;
 
     private String telefone1;
     private String telefone2;
     private String telefone3;
-
-    private Integer cidadeId;
 
     public ClienteNewDTO() {
     }
