@@ -2,6 +2,8 @@ package com.nelioalves.cursomc.dto;
 
 import com.nelioalves.cursomc.services.validation.ClienteInsert;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.br.CNPJ;
+import org.hibernate.validator.constraints.br.CPF;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -19,7 +21,6 @@ public class ClienteNewDTO implements Serializable {
     private String email;
 
     @NotEmpty(message = "Preenchimento obrigatório")
-
     private String cpfOuCnpj;
 
     private Integer tipo;
