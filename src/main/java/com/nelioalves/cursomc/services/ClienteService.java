@@ -37,14 +37,14 @@ public class ClienteService {
 
     public List<ClienteDTO> findAll() {
         List<Cliente> clientes = repository.findAll();
-        if (clientes.size() == 0) throw new ObjectNotFoundException("Nenhum objeto foi encontrado! Tipo: " + Cliente.class.getName());
+        if (clientes.isEmpty()) throw new ObjectNotFoundException("Nenhum objeto foi encontrado! Tipo: " + Cliente.class.getName());
         return clientes.stream().map(cliente -> new ClienteDTO(cliente)).collect(Collectors.toList());
     }
 
     public Page<ClienteDTO> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
         Page<Cliente> clientes = repository.findAll(pageRequest);
-        if (clientes.getContent().size() == 0) throw new ObjectNotFoundException("Nenhum objeto foi encontrado! Tipo: " + Cliente.class.getName());
+        if (clientes.getContent().isEmpty()) throw new ObjectNotFoundException("Nenhum objeto foi encontrado! Tipo: " + Cliente.class.getName());
         return clientes.map(cliente -> new ClienteDTO(cliente));
     }
 

@@ -30,14 +30,14 @@ public class CategoriaService {
 
     public List<CategoriaDTO> findAll() {
         List<Categoria> categorias =  repository.findAll();
-        if (categorias.size() == 0) throw new ObjectNotFoundException("Nenhum objeto foi encontrado! Tipo: " + Categoria.class.getName());
+        if (categorias.isEmpty()) throw new ObjectNotFoundException("Nenhum objeto foi encontrado! Tipo: " + Categoria.class.getName());
         return categorias.stream().map(categoria -> new CategoriaDTO(categoria)).collect(Collectors.toList());
     }
 
     public Page<CategoriaDTO> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
         Page<Categoria> categorias = repository.findAll(pageRequest);
-        if (categorias.getContent().size() == 0) throw new ObjectNotFoundException("Nenhum objeto foi encontrado! Tipo: " + Categoria.class.getName());
+        if (categorias.getContent().isEmpty()) throw new ObjectNotFoundException("Nenhum objeto foi encontrado! Tipo: " + Categoria.class.getName());
         return categorias.map(categoria -> new CategoriaDTO(categoria));
     }
 

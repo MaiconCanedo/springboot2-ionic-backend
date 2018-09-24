@@ -21,19 +21,19 @@ public class PedidoService {
 
     public Pedido find(Integer id) {
         Optional<Pedido> pedido = repository.findById(id);
-        return pedido.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! id: " + id + ", Tipo: " + Pedido.class.getName()));
+        return pedido.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Pedido.class.getName()));
     }
 
     public List<Pedido> findAll() {
         List<Pedido> pedidos = repository.findAll();
-        if (pedidos.size() == 0) throw new ObjectNotFoundException("Nenhum objeto foi encontrado! Tipo: " + Pedido.class.getName());
+        if (pedidos.isEmpty()) throw new ObjectNotFoundException("Nenhum objeto foi encontrado! Tipo: " + Pedido.class.getName());
         return pedidos;
     }
 
     public Page<Pedido> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
         Page<Pedido> pedidos = repository.findAll(pageRequest);
-        if (pedidos.getContent().size() == 0) throw new ObjectNotFoundException("Nenhum objeto foi encontrado! Tipo: " + Pedido.class.getName());
+        if (pedidos.getContent().isEmpty()) throw new ObjectNotFoundException("Nenhum objeto foi encontrado! Tipo: " + Pedido.class.getName());
         return pedidos;
     }
 }
