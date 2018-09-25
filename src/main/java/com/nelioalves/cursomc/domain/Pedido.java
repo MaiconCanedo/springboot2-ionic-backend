@@ -61,6 +61,14 @@ public class Pedido implements Serializable {
         return Objects.hash(id);
     }
 
+    public Double getValorTotal(){
+        Double soma = 0.0;
+        for (ItemPedido item : itens) {
+            soma += item.getSubTotal();
+        }
+        return soma;
+    }
+
     public Integer getId() {
         return id;
     }
