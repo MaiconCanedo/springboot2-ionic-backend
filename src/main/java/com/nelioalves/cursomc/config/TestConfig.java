@@ -1,6 +1,8 @@
 package com.nelioalves.cursomc.config;
 
 import com.nelioalves.cursomc.services.DBService;
+import com.nelioalves.cursomc.services.EmailService;
+import com.nelioalves.cursomc.services.MockEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -20,5 +22,10 @@ public class TestConfig {
     public Boolean instantiateDataBase() throws ParseException {
         dbService.instantiateTestDataBase();
         return true;
+    }
+
+    @Bean
+    public EmailService emailService() {
+        return new MockEmailService();
     }
 }
