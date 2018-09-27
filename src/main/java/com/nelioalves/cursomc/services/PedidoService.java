@@ -3,7 +3,6 @@ package com.nelioalves.cursomc.services;
 import com.nelioalves.cursomc.domain.ItemPedido;
 import com.nelioalves.cursomc.domain.PagamentoComBoleto;
 import com.nelioalves.cursomc.domain.Pedido;
-import com.nelioalves.cursomc.domain.Produto;
 import com.nelioalves.cursomc.domain.enums.EstadoPagamento;
 import com.nelioalves.cursomc.repositories.ItemPedidoRepository;
 import com.nelioalves.cursomc.repositories.PagamentoRepository;
@@ -12,7 +11,6 @@ import com.nelioalves.cursomc.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -68,7 +66,7 @@ public class PedidoService {
         pedido.setId(null);
         pedido.setInstante(new Date());
         pedido.setCliente(clienteService.find(pedido.getCliente().getId()));
-        pedido.getPagamento().setEstadoPagamento(EstadoPagamento.PENDENTE);
+        pedido.getPagamento().setEstado(EstadoPagamento.PENDENTE);
         pedido.getPagamento().setPedido(pedido);
         if (pedido.getPagamento() instanceof PagamentoComBoleto) {
             boletoService.preencherPagamentoComBoleto(((PagamentoComBoleto) pedido.getPagamento()), pedido.getInstante());
@@ -82,7 +80,7 @@ public class PedidoService {
             item.setPedido(pedido);
         }
         itemPedidoRepository.saveAll(pedido.getItens());
-        emailService.sendOrderConfirmationEmail(pedido);
+        emailService.sendOrderConfirmationHtmlEmail(pedido);
         return pedido;
     }
 }

@@ -68,7 +68,7 @@ public class Pedido implements Serializable {
         sb.append(id);
         sb.append(", Instante: ").append(dateFormat.format(instante));
         sb.append(", Cliente: ").append(cliente.getNome());
-        sb.append(", Situação do pagamento: ").append(pagamento.getEstadoPagamento().getDescricao());
+        sb.append(", Situação do pagamento: ").append(pagamento.getEstado().getDescricao());
         sb.append("\nDetalhes:\n");
         for (ItemPedido item : itens) {
             sb.append(item);
