@@ -2,6 +2,7 @@ package com.nelioalves.cursomc.services;
 
 import com.nelioalves.cursomc.domain.*;
 import com.nelioalves.cursomc.domain.enums.EstadoPagamento;
+import com.nelioalves.cursomc.domain.enums.Perfil;
 import com.nelioalves.cursomc.domain.enums.TipoCliente;
 import com.nelioalves.cursomc.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,11 +98,19 @@ public class DBService {
         Cliente cliente1 = new Cliente("Maria Silva", "springbootalura@gmail.com", "36378912377", TipoCliente.PESSOA_FISICA, passwordEncoder.encode("123"));
         cliente1.getTelefones().addAll(Arrays.asList("27363323", "93838393"));
 
+        Cliente cliente2 = new Cliente("Ana Costa", "maicon.canedo1995@gmail.com", "41921726318", TipoCliente.PESSOA_FISICA, passwordEncoder.encode("123"));
+        cliente1.getTelefones().addAll(Arrays.asList("89312343", "628387974"));
+        cliente2.addPerfil(Perfil.ADMIN);
+
         Endereco endereco1 = new Endereco("Rua Flores", "300", "Apto 203", "Jardim", "38220834", cliente1, cidade1);
         Endereco endereco2 = new Endereco("Avenida Matos", "105", "Sala 800", "Centro", "38777012", cliente1, cidade2);
+        Endereco endereco3 = new Endereco("Avenida Floriano", "2106", null, "Centro", "281777012", cliente2, cidade2);
 
-        clienteRepository.save(cliente1);
-        enderecoRepository.saveAll(Arrays.asList(endereco1, endereco2));
+        cliente1.getEnderecos().addAll(Arrays.asList(endereco1, endereco2));
+        cliente2.getEnderecos().add(endereco3);
+
+        clienteRepository.saveAll(Arrays.asList(cliente1, cliente2));
+        enderecoRepository.saveAll(Arrays.asList(endereco1, endereco2, endereco3));
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         Pedido pedido1 = new Pedido(dateFormat.parse("30/09/2017 10:32"), cliente1, endereco1);
