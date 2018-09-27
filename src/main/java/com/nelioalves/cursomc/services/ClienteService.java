@@ -1,6 +1,5 @@
 package com.nelioalves.cursomc.services;
 
-import com.nelioalves.cursomc.domain.Cidade;
 import com.nelioalves.cursomc.domain.Cliente;
 import com.nelioalves.cursomc.domain.Endereco;
 import com.nelioalves.cursomc.dto.ClienteDTO;
@@ -14,6 +13,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +23,9 @@ import java.util.stream.Collectors;
 
 @Service
 public class ClienteService {
+
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
     private ClienteRepository repository;
@@ -76,6 +79,7 @@ public class ClienteService {
     }
 
     public Cliente fromDTO(ClienteNewDTO clienteNewDTO) {
+        clienteNewDTO.setSenha(passwordEncoder.encode(clienteNewDTO.getSenha()));
         Cliente cliente = new Cliente(clienteNewDTO);
         Endereco endereco = new Endereco(clienteNewDTO, cliente);
         cliente.getEnderecos().add(endereco);
@@ -89,6 +93,5 @@ public class ClienteService {
         newCliente.setNome(cliente.getNome());
         newCliente.setEmail(cliente.getEmail());
     }
-
 
 }

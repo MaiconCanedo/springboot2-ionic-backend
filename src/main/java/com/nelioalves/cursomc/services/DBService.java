@@ -5,6 +5,7 @@ import com.nelioalves.cursomc.domain.enums.EstadoPagamento;
 import com.nelioalves.cursomc.domain.enums.TipoCliente;
 import com.nelioalves.cursomc.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -14,6 +15,8 @@ import java.util.Arrays;
 @Service
 public class DBService {
 
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
     @Autowired
     private CategoriaRepository categoriaRepository;
     @Autowired
@@ -91,7 +94,7 @@ public class DBService {
         estadoRepository.saveAll(Arrays.asList(estado1, estado2));
         cidadeRepository.saveAll(Arrays.asList(cidade1, cidade2, cidade3));
 
-        Cliente cliente1 = new Cliente("Maria Silva", "springbootalura@gmail.com", "36378912377", TipoCliente.PESSOA_FISICA);
+        Cliente cliente1 = new Cliente("Maria Silva", "springbootalura@gmail.com", "36378912377", TipoCliente.PESSOA_FISICA, passwordEncoder.encode("123"));
         cliente1.getTelefones().addAll(Arrays.asList("27363323", "93838393"));
 
         Endereco endereco1 = new Endereco("Rua Flores", "300", "Apto 203", "Jardim", "38220834", cliente1, cidade1);

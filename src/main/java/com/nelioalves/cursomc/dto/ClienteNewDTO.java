@@ -2,8 +2,6 @@ package com.nelioalves.cursomc.dto;
 
 import com.nelioalves.cursomc.services.validation.ClienteInsert;
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.br.CNPJ;
-import org.hibernate.validator.constraints.br.CPF;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -24,6 +22,9 @@ public class ClienteNewDTO implements Serializable {
     private String cpfOuCnpj;
 
     private Integer tipo;
+
+    @NotEmpty(message = "Preenchimento obrigatório")
+    private String senha;
 
     @NotEmpty(message = "Preenchimento obrigatório")
     private String logradouro;
@@ -153,5 +154,13 @@ public class ClienteNewDTO implements Serializable {
 
     public void setCidadeId(Integer cidadeId) {
         this.cidadeId = cidadeId;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 }
