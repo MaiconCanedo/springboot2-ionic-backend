@@ -62,7 +62,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             Long date = new Date().getTime();
             return "{\"timestamp\": " + date + " , " +
                     "\"status\": 401, " +
-                    "\"error\": \"Não autorizado\", " +
+                    "\"error\": \"Not Authorized (Não Autorizado)\", " +
                     "\"message\": \"Email ou senha inválidos\", " +
                     "\"path\": \"/login\"}";
         }
