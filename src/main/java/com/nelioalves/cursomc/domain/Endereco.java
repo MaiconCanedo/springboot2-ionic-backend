@@ -1,6 +1,5 @@
 package com.nelioalves.cursomc.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nelioalves.cursomc.dto.ClienteNewDTO;
 
@@ -56,8 +55,7 @@ public class Endereco implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Endereco endereco = (Endereco) o;
-        return Objects.equals(id, endereco.id);
+        return Objects.equals(id, ((Endereco) o).id);
     }
 
     @Override

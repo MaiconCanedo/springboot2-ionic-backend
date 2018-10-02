@@ -29,7 +29,7 @@ public class CategoriaService {
     }
 
     public List<CategoriaDTO> findAll() {
-        List<Categoria> categorias =  repository.findAll();
+        List<Categoria> categorias = repository.findAll();
         if (categorias.isEmpty()) throw new ObjectNotFoundException("Nenhum objeto foi encontrado! Tipo: " + Categoria.class.getName());
         return categorias.stream().map(categoria -> new CategoriaDTO(categoria)).collect(Collectors.toList());
     }

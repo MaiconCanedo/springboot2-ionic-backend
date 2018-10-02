@@ -33,15 +33,15 @@ public class CategoriaResource {
 
     @RequestMapping(value = "/page", method = RequestMethod.GET)
     public ResponseEntity<Page<CategoriaDTO>> findPage(@RequestParam(value = "page", defaultValue = "0") Integer page,
-                                                    @RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
-                                                    @RequestParam(value = "orderBy", defaultValue = "nome") String orderBy,
-                                                    @RequestParam(value = "direction", defaultValue = "ASC") String direction) {
+                                                       @RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
+                                                       @RequestParam(value = "orderBy", defaultValue = "nome") String orderBy,
+                                                       @RequestParam(value = "direction", defaultValue = "ASC") String direction) {
         return ResponseEntity.ok(service.findPage(page, linesPerPage, orderBy, direction));
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')")
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO categoriaDTO){
+    public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO categoriaDTO) {
         Categoria categoria = service.insert(service.fromDTO(categoriaDTO));
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(categoria.getId()).toUri();
         return ResponseEntity.created(uri).build();

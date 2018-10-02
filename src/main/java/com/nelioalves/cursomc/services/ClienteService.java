@@ -98,5 +98,4 @@ public class ClienteService {
         newCliente.setNome(cliente.getNome());
         newCliente.setEmail(cliente.getEmail());
     }
-
 }

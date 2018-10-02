@@ -17,7 +17,7 @@ public class URL {
 
     public static List<Integer> decodeIntList(String texto) {
         List<Integer> numeros = new ArrayList<>();
-        for(String text : texto.split(",")) {
+        for (String text : texto.split(",")) {
             numeros.add(Integer.valueOf(text.trim()));
         }
         return numeros;

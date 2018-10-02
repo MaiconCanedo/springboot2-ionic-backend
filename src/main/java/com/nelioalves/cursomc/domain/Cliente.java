@@ -28,7 +28,7 @@ public class Cliente implements Serializable {
     @JsonIgnore
     private String senha;
 
-//    @JsonManagedReference
+    //    @JsonManagedReference
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Endereco> enderecos = new ArrayList<>();
 
@@ -54,12 +54,12 @@ public class Cliente implements Serializable {
     }
 
     public Cliente(String nome, String email, String cpfOuCnpj, TipoCliente tipo, String senha) {
-            this.nome = nome;
-            this.email = email;
-            this.cpfOuCnpj = cpfOuCnpj;
-            this.tipo = (tipo == null) ? null : tipo.getCodigo();
-            this.senha = senha;
-            addPerfil(Perfil.CLIENTE);
+        this.nome = nome;
+        this.email = email;
+        this.cpfOuCnpj = cpfOuCnpj;
+        this.tipo = (tipo == null) ? null : tipo.getCodigo();
+        this.senha = senha;
+        addPerfil(Perfil.CLIENTE);
     }
 
     public Cliente(Integer id, String nome, String email) {
@@ -80,8 +80,7 @@ public class Cliente implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Cliente cliente = (Cliente) o;
-        return Objects.equals(id, cliente.id);
+        return Objects.equals(id, ((Cliente) o).id);
     }
 
     @Override

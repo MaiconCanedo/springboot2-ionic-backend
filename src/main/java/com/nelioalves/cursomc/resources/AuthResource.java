@@ -28,6 +28,7 @@ public class AuthResource {
     public ResponseEntity<Void> refreshToken(HttpServletResponse response) {
         String token = jwtUtil.generateToken(UserService.authenticated().getUsername());
         response.addHeader("Authorization", "Bearer " + token);
+        response.addHeader("access-control-expose-headers", "Authorization");
         return ResponseEntity.noContent().build();
     }
 

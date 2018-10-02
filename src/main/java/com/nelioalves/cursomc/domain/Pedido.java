@@ -15,7 +15,7 @@ public class Pedido implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @JsonFormat(pattern =  "dd/MM/yyyy HH:mm")
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     @Temporal(TemporalType.TIMESTAMP)
     private Date instante;
 
@@ -40,9 +40,9 @@ public class Pedido implements Serializable {
         this(instante, cliente, enderecoDeEntrega);
         this.id = id;
     }
+
     public Pedido(Date instante, Cliente cliente, Endereco enderecoDeEntrega) {
         this.instante = instante;
-        this.pagamento = pagamento;
         this.cliente = cliente;
         this.enderecoDeEntrega = enderecoDeEntrega;
     }
@@ -51,8 +51,7 @@ public class Pedido implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Pedido pedido = (Pedido) o;
-        return Objects.equals(id, pedido.id);
+        return Objects.equals(id, ((Pedido) o).id);
     }
 
     @Override
@@ -77,7 +76,7 @@ public class Pedido implements Serializable {
         return sb.toString();
     }
 
-    public Double getValorTotal(){
+    public Double getValorTotal() {
         Double soma = 0.0;
         for (ItemPedido item : itens) {
             soma += item.getSubTotal();

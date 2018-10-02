@@ -17,18 +17,19 @@ public class Categoria implements Serializable {
     private Integer id;
     private String nome;
 
-//    @JsonManagedReference
+    //    @JsonManagedReference
     @ManyToMany(mappedBy = "categorias")
     private List<Produto> produtos = new ArrayList<>();
 
-    public Categoria() {}
+    public Categoria() {
+    }
 
     public Categoria(Integer id, String nome) {
         this.id = id;
         this.nome = nome;
     }
 
-    public Categoria(CategoriaDTO categoriaDTO){
+    public Categoria(CategoriaDTO categoriaDTO) {
         this(categoriaDTO.getId(), categoriaDTO.getNome());
     }
 
@@ -40,8 +41,7 @@ public class Categoria implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Categoria that = (Categoria) o;
-        return Objects.equals(id, that.id);
+        return Objects.equals(id, ((Categoria) o).id);
     }
 
     @Override

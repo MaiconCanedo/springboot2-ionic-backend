@@ -40,8 +40,7 @@ public abstract class Pagamento implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Pagamento pagamento = (Pagamento) o;
-        return Objects.equals(id, pagamento.id);
+        return Objects.equals(id, ((Pagamento) o).id);
     }
 
     @Override

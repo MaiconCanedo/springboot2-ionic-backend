@@ -1,12 +1,10 @@
 package com.nelioalves.cursomc.resources.exceptions;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.io.Serializable;
 
 public class StandardError implements Serializable {
 
-    private  Integer status;
+    private Integer status;
     private String message;
     private Long timeStamp;
 

@@ -16,12 +16,13 @@ public class Estado implements Serializable {
     private Integer id;
     private String nome;
 
-//    @JsonBackReference
+    //    @JsonBackReference
     @JsonIgnore
     @OneToMany(mappedBy = "estado")
     List<Cidade> cidades = new ArrayList<>();
 
-    public Estado() {}
+    public Estado() {
+    }
 
     public Estado(Integer id, String nome) {
         this.id = id;
@@ -36,8 +37,7 @@ public class Estado implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Estado estado = (Estado) o;
-        return Objects.equals(id, estado.id);
+        return Objects.equals(id, ((Estado) o).id);
     }
 
     @Override

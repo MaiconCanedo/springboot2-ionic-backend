@@ -13,12 +13,13 @@ public class Cidade implements Serializable {
     private Integer id;
     private String nome;
 
-//    @JsonManagedReference
+    //    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "estado_id")
     private Estado estado;
 
-    public Cidade() {}
+    public Cidade() {
+    }
 
     public Cidade(Integer id) {
         this.id = id;
@@ -39,8 +40,7 @@ public class Cidade implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Cidade cidade = (Cidade) o;
-        return Objects.equals(id, cidade.id);
+        return Objects.equals(id, ((Cidade) o).id);
     }
 
     @Override

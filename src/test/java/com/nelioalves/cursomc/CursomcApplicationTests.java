@@ -12,5 +12,4 @@ public class CursomcApplicationTests {
     @Test
     public void contextLoads() {
     }
-
 }

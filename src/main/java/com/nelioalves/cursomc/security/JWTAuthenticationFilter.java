@@ -46,10 +46,10 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
         String token = jwtUtil.generateToken(((UserSS) authResult.getPrincipal()).getUsername());
         response.addHeader("Authorization", "Bearer " + token);
+        response.addHeader("access-control-expose-headers", "Authorization");
     }
 
     private class JWTAuthenticationFailureHandler implements AuthenticationFailureHandler {
-
 
         @Override
         public void onAuthenticationFailure(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
@@ -67,5 +67,4 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                     "\"path\": \"/login\"}";
         }
     }
-
 }

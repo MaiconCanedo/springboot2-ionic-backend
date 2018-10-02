@@ -15,9 +15,9 @@ import java.text.ParseException;
 @Profile("dev")
 public class DevConfig {
 
+
     @Autowired
     private DBService dbService;
-
     @Value("${spring.jpa.hibernate.ddl-auto}")
     private String strategy;
 

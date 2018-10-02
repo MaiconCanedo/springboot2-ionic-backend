@@ -23,10 +23,12 @@ public enum EstadoPagamento {
     }
 
     public static EstadoPagamento toEnum(Integer codigo) {
-        if(codigo == null) return null;
-        for(EstadoPagamento estadoPagamento : EstadoPagamento.values()){
+        if (codigo == null) return null;
+
+        for (EstadoPagamento estadoPagamento : EstadoPagamento.values()) {
             if (estadoPagamento.codigo.equals(codigo)) return estadoPagamento;
         }
+
         throw new IllegalArgumentException("Código inválido: " + codigo);
     }
 }
