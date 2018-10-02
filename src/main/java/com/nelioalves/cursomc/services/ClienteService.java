@@ -1,5 +1,6 @@
 package com.nelioalves.cursomc.services;
 
+import ch.qos.logback.core.net.server.Client;
 import com.nelioalves.cursomc.domain.Cliente;
 import com.nelioalves.cursomc.domain.Endereco;
 import com.nelioalves.cursomc.domain.enums.Perfil;
@@ -47,6 +48,19 @@ public class ClienteService {
         List<Cliente> clientes = repository.findAll();
         if (clientes.isEmpty()) throw new ObjectNotFoundException("Nenhum objeto foi encontrado! Tipo: " + Cliente.class.getName());
         return clientes.stream().map(cliente -> new ClienteDTO(cliente)).collect(Collectors.toList());
+    }
+
+    public Cliente findByEmail(String email) {
+        UserSS user = UserService.authenticated();
+        if (user == null || !user.hasHole(Perfil.ADMIN) && !email.equals(user.getUsername())) {
+            throw new AuthorizationException("Acesso Negado");
+        }
+
+        Cliente cliente = repository.findByEmail(email);
+        if (cliente == null) {
+            throw new AuthorizationException("Objeto não encontrado! id: " + user.getId() + ", Tipo: " + Cliente.class.getName());
+        }
+        return cliente;
     }
 
     public Page<ClienteDTO> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
