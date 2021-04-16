@@ -1,4 +1,4 @@
-package com.nelioalves.cursomc.domain.service.validation.utils;
+package com.nelioalves.cursomc.core.validation.utils;
 
 //Fonte: https://gist.github.com/adrianoluis/5043397d378ae506d87366abb0ab4e30
 public class BR {

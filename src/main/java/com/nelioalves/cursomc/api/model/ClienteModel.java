@@ -1,7 +1,7 @@
 package com.nelioalves.cursomc.api.model;
 
 import com.nelioalves.cursomc.domain.entity.Cliente;
-import com.nelioalves.cursomc.domain.service.validation.ClienteUpdate;
+import com.nelioalves.cursomc.core.validation.ClienteUpdate;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;

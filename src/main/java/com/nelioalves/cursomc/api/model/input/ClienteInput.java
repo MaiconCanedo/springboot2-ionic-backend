@@ -1,6 +1,6 @@
 package com.nelioalves.cursomc.api.model.input;
 
-import com.nelioalves.cursomc.domain.service.validation.ClienteInsert;
+import com.nelioalves.cursomc.core.validation.ClienteInsert;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;

@@ -1,4 +1,4 @@
-package com.nelioalves.cursomc.domain.service.validation;
+package com.nelioalves.cursomc.core.validation;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -7,10 +7,10 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Constraint(validatedBy = ClienteUpdateValidator.class)
+@Constraint(validatedBy = ClienteInsertValidator.class)
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ClienteUpdate {
+public @interface ClienteInsert {
 
     String message() default "Erro de validação";
 

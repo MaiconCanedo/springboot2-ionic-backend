@@ -1,4 +1,4 @@
-package com.nelioalves.cursomc.domain.service.validation;
+package com.nelioalves.cursomc.core.validation;
 
 import com.nelioalves.cursomc.domain.entity.Cliente;
 import com.nelioalves.cursomc.api.model.ClienteModel;
