@@ -1,4 +1,4 @@
-package com.nelioalves.cursomc.core.config;
+package com.nelioalves.cursomc.core;
 
 import com.nelioalves.cursomc.domain.service.DBService;
 import com.nelioalves.cursomc.domain.service.EmailService;

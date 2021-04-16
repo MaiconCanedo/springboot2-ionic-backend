@@ -1,4 +1,4 @@
-package com.nelioalves.cursomc.core.config;
+package com.nelioalves.cursomc.core.jackson;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nelioalves.cursomc.domain.entity.PagamentoComBoleto;

@@ -1,4 +1,4 @@
-package com.nelioalves.cursomc.filters;
+package com.nelioalves.cursomc.core.security.filters;
 
 import org.springframework.stereotype.Component;
 

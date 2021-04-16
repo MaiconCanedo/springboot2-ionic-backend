@@ -1,4 +1,4 @@
-package com.nelioalves.cursomc.core.config;
+package com.nelioalves.cursomc.core.security;
 
 import com.nelioalves.cursomc.core.security.JWTAuthenticationFilter;
 import com.nelioalves.cursomc.core.security.JWTAuthorizationFilter;
