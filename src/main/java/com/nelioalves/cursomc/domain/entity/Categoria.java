@@ -1,7 +1,7 @@
 package com.nelioalves.cursomc.domain.entity;
 
 
-import com.nelioalves.cursomc.api.model.CategoriaModel;
+import com.nelioalves.cursomc.api.v1.model.CategoriaModel;
 
 import javax.persistence.*;
 import java.io.Serializable;

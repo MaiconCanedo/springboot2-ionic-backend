@@ -1,19 +1,19 @@
 package com.nelioalves.cursomc.domain.service;
 
-import com.nelioalves.cursomc.api.model.ProdutoModel;
 import com.nelioalves.cursomc.domain.entity.Produto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ProdutoService {
 
-    Produto find(Integer id);
+    Optional<Produto> find(Integer id);
 
-    List<Produto> findAll();
+    Produto findOrFail(Integer id);
 
-    Page<Produto> findPage(Pageable pageable);
+    Page<Produto> findAll(Pageable pageable);
 
-    Page<ProdutoModel> search(String nome, List<Integer> ids, Pageable pageable);
+    Page<Produto> findAll(String nome, List<Integer> ids, Pageable pageable);
 }

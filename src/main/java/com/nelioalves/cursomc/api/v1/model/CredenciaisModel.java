@@ -1,4 +1,4 @@
-package com.nelioalves.cursomc.api.model;
+package com.nelioalves.cursomc.api.v1.model;
 
 import java.io.Serializable;
 

@@ -1,18 +1,15 @@
-package com.nelioalves.cursomc.api.controller.utils;
+package com.nelioalves.cursomc.api.v1.controller.utils;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 public class URL {
 
     public static String decodeParam(String texto) {
-        try {
-            return URLDecoder.decode(texto, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            return "";
-        }
+        return URLDecoder.decode(texto, UTF_8);
     }
 
     public static List<Integer> decodeIntList(String texto) {

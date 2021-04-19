@@ -1,7 +1,7 @@
 package com.nelioalves.cursomc.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.nelioalves.cursomc.api.model.input.ClienteInput;
+import com.nelioalves.cursomc.api.v1.model.input.ClienteInput;
 
 import javax.persistence.*;
 import java.io.Serializable;

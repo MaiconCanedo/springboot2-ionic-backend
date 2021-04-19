@@ -2,7 +2,7 @@ package com.nelioalves.cursomc.domain.service.impl;
 
 import com.nelioalves.cursomc.domain.entity.Cliente;
 import com.nelioalves.cursomc.domain.repository.ClienteRepository;
-import com.nelioalves.cursomc.core.security.UserSS;
+import com.nelioalves.cursomc.core.security.UserSecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -19,6 +19,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Cliente cliente = repository.findByEmail(email);
         if (cliente == null) throw new UsernameNotFoundException(email);
-        return new UserSS(cliente);
+        return new UserSecurityService(cliente);
     }
 }

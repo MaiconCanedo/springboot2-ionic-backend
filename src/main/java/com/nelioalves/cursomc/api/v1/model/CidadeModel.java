@@ -1,4 +1,4 @@
-package com.nelioalves.cursomc.api.model;
+package com.nelioalves.cursomc.api.v1.model;
 
 import com.nelioalves.cursomc.domain.entity.Cidade;
 

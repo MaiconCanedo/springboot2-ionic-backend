@@ -1,7 +1,7 @@
-package com.nelioalves.cursomc.api.controller;
+package com.nelioalves.cursomc.api.v1.controller;
 
 import com.nelioalves.cursomc.domain.entity.Categoria;
-import com.nelioalves.cursomc.api.model.CategoriaModel;
+import com.nelioalves.cursomc.api.v1.model.CategoriaModel;
 import com.nelioalves.cursomc.domain.service.impl.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

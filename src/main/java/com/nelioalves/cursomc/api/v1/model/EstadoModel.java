@@ -1,29 +1,27 @@
-package com.nelioalves.cursomc.api.model;
+package com.nelioalves.cursomc.api.v1.model;
 
-import com.nelioalves.cursomc.domain.entity.Categoria;
+import com.nelioalves.cursomc.domain.entity.Estado;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 
-public class CategoriaModel implements Serializable {
+public class EstadoModel implements Serializable {
 
     private Integer id;
 
     @NotEmpty(message = "Preenchimento obrigatório")
-    @Size(min = 5, max = 80, message = "O tamanho deve ser entre 5 e 80 caracteres")
     private String nome;
 
-    public CategoriaModel() {
+    public EstadoModel() {
     }
 
-    public CategoriaModel(Integer id, String nome) {
+    public EstadoModel(Integer id, @NotEmpty(message = "Preenchimento obrigatório") String nome) {
         this.id = id;
         this.nome = nome;
     }
 
-    public CategoriaModel(Categoria categoria) {
-        this(categoria.getId(), categoria.getNome());
+    public EstadoModel(Estado estado) {
+        this(estado.getId(), estado.getNome());
     }
 
     public Integer getId() {

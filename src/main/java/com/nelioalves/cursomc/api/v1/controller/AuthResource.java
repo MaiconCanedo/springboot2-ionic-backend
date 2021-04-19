@@ -1,6 +1,6 @@
-package com.nelioalves.cursomc.api.controller;
+package com.nelioalves.cursomc.api.v1.controller;
 
-import com.nelioalves.cursomc.api.model.EmailModel;
+import com.nelioalves.cursomc.api.v1.model.EmailModel;
 import com.nelioalves.cursomc.core.security.JWTUtil;
 import com.nelioalves.cursomc.domain.service.impl.AuthService;
 import com.nelioalves.cursomc.domain.service.UserService;

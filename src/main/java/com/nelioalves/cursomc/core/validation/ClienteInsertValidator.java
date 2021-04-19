@@ -1,9 +1,9 @@
 package com.nelioalves.cursomc.core.validation;
 
 import com.nelioalves.cursomc.domain.entity.enums.TipoCliente;
-import com.nelioalves.cursomc.api.model.input.ClienteInput;
+import com.nelioalves.cursomc.api.v1.model.input.ClienteInput;
 import com.nelioalves.cursomc.domain.repository.ClienteRepository;
-import com.nelioalves.cursomc.api.controller.exceptions.FieldMessage;
+import com.nelioalves.cursomc.api.exceptions.FieldMessage;
 import com.nelioalves.cursomc.core.validation.utils.BR;
 import org.springframework.beans.factory.annotation.Autowired;
 

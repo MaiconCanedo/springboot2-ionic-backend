@@ -2,7 +2,7 @@ package com.nelioalves.cursomc.domain.service.impl;
 
 import com.nelioalves.cursomc.domain.entity.Cliente;
 import com.nelioalves.cursomc.domain.repository.ClienteRepository;
-import com.nelioalves.cursomc.domain.exception.ObjectNotFoundException;
+import com.nelioalves.cursomc.domain.exception.NotFoundException;
 import com.nelioalves.cursomc.domain.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -26,7 +26,7 @@ public class AuthService {
 
     public void sendNewPassword(String email) {
         Cliente cliente = repository.findByEmail(email);
-        if (cliente == null) throw new ObjectNotFoundException("E-mail não encontrado!");
+        if (cliente == null) throw new NotFoundException("E-mail não encontrado!");
         String newPass = newPassword();
         cliente.setSenha(passwordEncoder.encode(newPass));
         repository.save(cliente);

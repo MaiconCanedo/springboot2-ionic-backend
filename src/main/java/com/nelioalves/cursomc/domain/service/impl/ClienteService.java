@@ -3,14 +3,14 @@ package com.nelioalves.cursomc.domain.service.impl;
 import com.nelioalves.cursomc.domain.entity.Cliente;
 import com.nelioalves.cursomc.domain.entity.Endereco;
 import com.nelioalves.cursomc.domain.entity.enums.Perfil;
-import com.nelioalves.cursomc.api.model.ClienteModel;
-import com.nelioalves.cursomc.api.model.input.ClienteInput;
+import com.nelioalves.cursomc.api.v1.model.ClienteModel;
+import com.nelioalves.cursomc.api.v1.model.input.ClienteInput;
 import com.nelioalves.cursomc.domain.repository.ClienteRepository;
 import com.nelioalves.cursomc.domain.repository.EnderecoRepository;
-import com.nelioalves.cursomc.core.security.UserSS;
+import com.nelioalves.cursomc.core.security.UserSecurityService;
 import com.nelioalves.cursomc.domain.exception.AuthorizationException;
 import com.nelioalves.cursomc.domain.exception.DataIntegrityException;
-import com.nelioalves.cursomc.domain.exception.ObjectNotFoundException;
+import com.nelioalves.cursomc.domain.exception.NotFoundException;
 import com.nelioalves.cursomc.domain.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -38,20 +38,20 @@ public class ClienteService {
     private EnderecoRepository enderecoRepository;
 
     public Cliente find(Integer id) {
-        UserSS user = UserService.authenticated();
+        UserSecurityService user = UserService.authenticated();
         if (user == null || !user.hasHole(Perfil.ADMIN) && !id.equals(user.getId())) throw new AuthorizationException("Acesso Negado");
         Optional<Cliente> cliente = repository.findById(id);
-        return cliente.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! id: " + id + ", Tipo: " + Cliente.class.getName()));
+        return cliente.orElseThrow(() -> new NotFoundException("Objeto não encontrado! id: " + id + ", Tipo: " + Cliente.class.getName()));
     }
 
     public List<ClienteModel> findAll() {
         List<Cliente> clientes = repository.findAll();
-        if (clientes.isEmpty()) throw new ObjectNotFoundException("Nenhum objeto foi encontrado! Tipo: " + Cliente.class.getName());
+        if (clientes.isEmpty()) throw new NotFoundException("Nenhum objeto foi encontrado! Tipo: " + Cliente.class.getName());
         return clientes.stream().map(cliente -> new ClienteModel(cliente)).collect(Collectors.toList());
     }
 
     public Cliente findByEmail(String email) {
-        UserSS user = UserService.authenticated();
+        UserSecurityService user = UserService.authenticated();
         if (user == null || !user.hasHole(Perfil.ADMIN) && !email.equals(user.getUsername())) {
             throw new AuthorizationException("Acesso Negado");
         }
@@ -66,7 +66,7 @@ public class ClienteService {
     public Page<ClienteModel> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
         Page<Cliente> clientes = repository.findAll(pageRequest);
-        if (clientes.getContent().isEmpty()) throw new ObjectNotFoundException("Nenhum objeto foi encontrado! Tipo: " + Cliente.class.getName());
+        if (clientes.getContent().isEmpty()) throw new NotFoundException("Nenhum objeto foi encontrado! Tipo: " + Cliente.class.getName());
         return clientes.map(cliente -> new ClienteModel(cliente));
     }
 

@@ -1,4 +1,4 @@
-package com.nelioalves.cursomc.api.model.input;
+package com.nelioalves.cursomc.api.v1.model.input;
 
 import com.nelioalves.cursomc.core.validation.ClienteInsert;
 

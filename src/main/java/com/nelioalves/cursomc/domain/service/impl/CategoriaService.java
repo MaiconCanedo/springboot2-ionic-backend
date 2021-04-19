@@ -1,10 +1,10 @@
 package com.nelioalves.cursomc.domain.service.impl;
 
 import com.nelioalves.cursomc.domain.entity.Categoria;
-import com.nelioalves.cursomc.api.model.CategoriaModel;
+import com.nelioalves.cursomc.api.v1.model.CategoriaModel;
 import com.nelioalves.cursomc.domain.repository.CategoriaRepository;
 import com.nelioalves.cursomc.domain.exception.DataIntegrityException;
-import com.nelioalves.cursomc.domain.exception.ObjectNotFoundException;
+import com.nelioalves.cursomc.domain.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -24,19 +24,19 @@ public class CategoriaService {
 
     public Categoria find(Integer id) {
         Optional<Categoria> categoria = repository.findById(id);
-        return categoria.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
+        return categoria.orElseThrow(() -> new NotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
     }
 
     public List<CategoriaModel> findAll() {
         List<Categoria> categorias = repository.findAll();
-        if (categorias.isEmpty()) throw new ObjectNotFoundException("Nenhum objeto foi encontrado! Tipo: " + Categoria.class.getName());
+        if (categorias.isEmpty()) throw new NotFoundException("Nenhum objeto foi encontrado! Tipo: " + Categoria.class.getName());
         return categorias.stream().map(categoria -> new CategoriaModel(categoria)).collect(Collectors.toList());
     }
 
     public Page<CategoriaModel> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
         Page<Categoria> categorias = repository.findAll(pageRequest);
-        if (categorias.getContent().isEmpty()) throw new ObjectNotFoundException("Nenhum objeto foi encontrado! Tipo: " + Categoria.class.getName());
+        if (categorias.getContent().isEmpty()) throw new NotFoundException("Nenhum objeto foi encontrado! Tipo: " + Categoria.class.getName());
         return categorias.map(categoria -> new CategoriaModel(categoria));
     }
 

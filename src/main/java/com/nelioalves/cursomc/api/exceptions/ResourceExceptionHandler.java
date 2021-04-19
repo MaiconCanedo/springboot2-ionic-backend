@@ -1,8 +1,8 @@
-package com.nelioalves.cursomc.api.controller.exceptions;
+package com.nelioalves.cursomc.api.exceptions;
 
 import com.nelioalves.cursomc.domain.exception.AuthorizationException;
 import com.nelioalves.cursomc.domain.exception.DataIntegrityException;
-import com.nelioalves.cursomc.domain.exception.ObjectNotFoundException;
+import com.nelioalves.cursomc.domain.exception.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -15,8 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 @ControllerAdvice
 public class ResourceExceptionHandler {
 
-    @ExceptionHandler(ObjectNotFoundException.class)
-    public ResponseEntity<StandardError> objectNotFound(ObjectNotFoundException e, HttpServletRequest request) {
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<StandardError> objectNotFound(NotFoundException e, HttpServletRequest request) {
         StandardError error = new StandardError(System.currentTimeMillis(), HttpStatus.NOT_FOUND.value(), "Not found (Não Encontrado)", e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }

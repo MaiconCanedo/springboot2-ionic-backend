@@ -1,7 +1,7 @@
 package com.nelioalves.cursomc.core.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nelioalves.cursomc.api.model.CredenciaisModel;
+import com.nelioalves.cursomc.api.v1.model.CredenciaisModel;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -44,7 +44,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
-        String token = jwtUtil.generateToken(((UserSS) authResult.getPrincipal()).getUsername());
+        String token = jwtUtil.generateToken(((UserSecurityService) authResult.getPrincipal()).getUsername());
         response.addHeader("Authorization", "Bearer " + token);
         response.addHeader("access-control-expose-headers", "Authorization");
     }

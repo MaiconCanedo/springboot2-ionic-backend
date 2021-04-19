@@ -1,4 +1,4 @@
-package com.nelioalves.cursomc.api.controller.exceptions;
+package com.nelioalves.cursomc.api.exceptions;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -2,7 +2,7 @@ package com.nelioalves.cursomc.domain.repository;
 
 import com.nelioalves.cursomc.domain.entity.Cidade;
 import com.nelioalves.cursomc.domain.entity.Estado;
-import com.nelioalves.cursomc.api.model.CidadeModel;
+import com.nelioalves.cursomc.api.v1.model.CidadeModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

@@ -10,24 +10,24 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class UserSS implements UserDetails {
+public class UserSecurityService implements UserDetails {
 
     private Integer id;
     private String email;
     private String senha;
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserSS() {
+    public UserSecurityService() {
     }
 
-    public UserSS(Integer id, String email, String senha, Set<Perfil> perfis) {
+    public UserSecurityService(Integer id, String email, String senha, Set<Perfil> perfis) {
         this.id = id;
         this.email = email;
         this.senha = senha;
         this.authorities = perfis.stream().map(perfil -> new SimpleGrantedAuthority(perfil.getDescricao())).collect(Collectors.toList());
     }
 
-    public UserSS(Cliente cliente) {
+    public UserSecurityService(Cliente cliente) {
         this(cliente.getId(), cliente.getEmail(), cliente.getSenha(), cliente.getPerfis());
     }
 

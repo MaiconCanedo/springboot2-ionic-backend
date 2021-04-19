@@ -7,9 +7,9 @@ import com.nelioalves.cursomc.domain.entity.enums.EstadoPagamento;
 import com.nelioalves.cursomc.domain.repository.ItemPedidoRepository;
 import com.nelioalves.cursomc.domain.repository.PagamentoRepository;
 import com.nelioalves.cursomc.domain.repository.PedidoRepository;
-import com.nelioalves.cursomc.core.security.UserSS;
+import com.nelioalves.cursomc.core.security.UserSecurityService;
 import com.nelioalves.cursomc.domain.exception.AuthorizationException;
-import com.nelioalves.cursomc.domain.exception.ObjectNotFoundException;
+import com.nelioalves.cursomc.domain.exception.NotFoundException;
 import com.nelioalves.cursomc.domain.service.EmailService;
 import com.nelioalves.cursomc.domain.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,21 +49,21 @@ public class PedidoService {
 
     public Pedido find(Integer id) {
         Optional<Pedido> pedido = repository.findById(id);
-        return pedido.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Pedido.class.getName()));
+        return pedido.orElseThrow(() -> new NotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Pedido.class.getName()));
     }
 
     public List<Pedido> findAll() {
         List<Pedido> pedidos = repository.findAll();
-        if (pedidos.isEmpty()) throw new ObjectNotFoundException("Nenhum objeto foi encontrado! Tipo: " + Pedido.class.getName());
+        if (pedidos.isEmpty()) throw new NotFoundException("Nenhum objeto foi encontrado! Tipo: " + Pedido.class.getName());
         return pedidos;
     }
 
     public Page<Pedido> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
-        UserSS user = UserService.authenticated();
+        UserSecurityService user = UserService.authenticated();
         if (user == null) throw new AuthorizationException("Acesso negado");
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
         Page<Pedido> pedidos = repository.findByCliente(clienteService.find(user.getId()), pageRequest);
-        if (pedidos.getContent().isEmpty()) throw new ObjectNotFoundException("Nenhum objeto foi encontrado! Tipo: " + Pedido.class.getName());
+        if (pedidos.getContent().isEmpty()) throw new NotFoundException("Nenhum objeto foi encontrado! Tipo: " + Pedido.class.getName());
         return pedidos;
     }
 
@@ -81,7 +81,7 @@ public class PedidoService {
         pagamentoRepository.save(pedido.getPagamento());
         for (ItemPedido item : pedido.getItens()) {
             item.setDesconto(0.0);
-            item.setProduto(produtoServiceImpl.find(item.getProduto().getId()));
+            item.setProduto(produtoServiceImpl.findOrFail(item.getProduto().getId()));
             item.setPreco(item.getProduto().getPreco());
             item.setPedido(pedido);
         }
