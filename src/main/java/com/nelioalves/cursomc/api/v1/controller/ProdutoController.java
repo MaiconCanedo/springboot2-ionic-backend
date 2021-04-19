@@ -34,7 +34,7 @@ public class ProdutoController {
     public Page<ProdutoModel> findAll(
             @RequestParam(value = "nome", defaultValue = "") String nome,
             @RequestParam(value = "categorias", defaultValue = "") List<Integer> categorias,
-            @PageableDefault(size = 24, sort = "nome", direction = ASC) Pageable pageable
+            @PageableDefault(size = 24, sort = "nome") Pageable pageable
     ) {
         return service.findAll(nome, categorias, pageable)
                 .map(assembler::toModel);
