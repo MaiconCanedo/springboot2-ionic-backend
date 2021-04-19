@@ -1,9 +1,7 @@
 package com.nelioalves.cursomc.api.v1.controller;
 
 import com.nelioalves.cursomc.api.v1.assembler.ProdutoModelAssembler;
-import com.nelioalves.cursomc.api.v1.controller.utils.URL;
 import com.nelioalves.cursomc.api.v1.model.ProdutoModel;
-import com.nelioalves.cursomc.domain.entity.Produto;
 import com.nelioalves.cursomc.domain.service.ProdutoService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,7 +25,7 @@ public class ProdutoController {
     }
 
     @GetMapping(value = "{id}")
-    public ProdutoModel findById(@PathVariable Integer id) {
+    public ProdutoModel findById(@PathVariable String id) {
         final var produto = service.findOrFail(id);
         return assembler.toModel(produto);
     }
@@ -38,7 +36,7 @@ public class ProdutoController {
             @RequestParam(value = "categorias", defaultValue = "") List<Integer> categorias,
             @PageableDefault(size = 24, sort = "nome", direction = ASC) Pageable pageable
     ) {
-        return service.findAll(URL.decodeParam(nome), categorias, pageable)
+        return service.findAll(nome, categorias, pageable)
                 .map(assembler::toModel);
     }
 }

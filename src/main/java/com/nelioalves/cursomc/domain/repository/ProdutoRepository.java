@@ -8,13 +8,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.Collection;
+import java.util.Optional;
 
 @Repository
 public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
 
-//    @Query("SELECT DISTINCT pd FROM Produto pd INNER JOIN pd.categorias cat WHERE pd.nome LIKE %:nome% AND cat IN :categorias")
-//    Page<Produto> search(@Param("nome") String nome, @Param("categorias") List<Categoria> categorias, Pageable pageable);
+    Optional<Produto> findByCodigo(String codigo);
+
     @Transactional(readOnly = true)
-    Page<Produto> findDistinctByNomeContainingIgnoreCaseAndCategoriasIn(String nome, List<Categoria> categorias, Pageable pageable);
+    Page<Produto> findDistinctByNomeContainingIgnoreCaseAndCategoriasIn(String nome, Collection<Categoria> categorias, Pageable pageable);
 }

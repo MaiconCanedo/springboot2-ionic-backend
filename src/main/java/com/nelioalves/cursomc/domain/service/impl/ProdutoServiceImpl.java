@@ -23,13 +23,13 @@ public class ProdutoServiceImpl implements ProdutoService {
         this.categoriaRepository = categoriaRepository;
     }
 
-    public Optional<Produto> find(Integer id) {
-        return repository.findById(id);
+    public Optional<Produto> find(String codigo) {
+        return repository.findByCodigo(codigo);
     }
 
-    public Produto findOrFail(Integer id) {
-        return find(id)
-                .orElseThrow(() -> new ProdutoNotFoundException(id));
+    public Produto findOrFail(String codigo) {
+        return find(codigo)
+                .orElseThrow(() -> new ProdutoNotFoundException(codigo));
     }
 
     public Page<Produto> findAll(Pageable pageable) {

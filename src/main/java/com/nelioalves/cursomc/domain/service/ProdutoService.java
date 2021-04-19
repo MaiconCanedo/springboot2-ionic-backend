@@ -9,9 +9,9 @@ import java.util.Optional;
 
 public interface ProdutoService {
 
-    Optional<Produto> find(Integer id);
+    Optional<Produto> find(String codigo);
 
-    Produto findOrFail(Integer id);
+    Produto findOrFail(String codigo);
 
     Page<Produto> findAll(Pageable pageable);
 

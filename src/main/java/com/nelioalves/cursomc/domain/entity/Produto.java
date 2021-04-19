@@ -1,32 +1,37 @@
 package com.nelioalves.cursomc.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.*;
 
+@Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@NoArgsConstructor
 @Entity
-public class Produto implements Serializable {
+public class Produto {
 
+    @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(nullable = false, unique = true)
+    private String codigo;
+
     private String nome;
+
     private Double preco;
 
-    //    @JsonBackReference
-    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "produto_categoria", joinColumns = @JoinColumn(name = "produto_id"), inverseJoinColumns = @JoinColumn(name = "categoria_id"))
     private List<Categoria> categorias = new ArrayList<>();
 
-    @JsonIgnore
     @OneToMany(mappedBy = "id.pedido")
     private Set<ItemPedido> itens = new HashSet<>();
-
-    public Produto() {
-    }
 
     public Produto(Integer id, String nome, Double preco) {
         this(nome, preco);
@@ -38,18 +43,6 @@ public class Produto implements Serializable {
         this.preco = preco;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        return Objects.equals(id, ((Produto) o).id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-
     @JsonIgnore
     public List<Pedido> getPedidos() {
         List<Pedido> pedidos = new ArrayList<>();
@@ -59,43 +52,8 @@ public class Produto implements Serializable {
         return pedidos;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public Double getPreco() {
-        return preco;
-    }
-
-    public void setPreco(Double preco) {
-        this.preco = preco;
-    }
-
-    public List<Categoria> getCategorias() {
-        return categorias;
-    }
-
-    public void setCategorias(List<Categoria> categorias) {
-        this.categorias = categorias;
-    }
-
-    public Set<ItemPedido> getItens() {
-        return itens;
-    }
-
-    public void setItens(Set<ItemPedido> itens) {
-        this.itens = itens;
+    @PrePersist
+    public void prePersist() {
+        this.codigo = UUID.randomUUID().toString();
     }
 }
