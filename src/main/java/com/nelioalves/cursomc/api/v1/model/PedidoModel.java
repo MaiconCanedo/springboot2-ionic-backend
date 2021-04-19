@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.nelioalves.cursomc.domain.entity.Cliente;
 import com.nelioalves.cursomc.domain.entity.Endereco;
 import com.nelioalves.cursomc.domain.entity.ItemPedido;
-import com.nelioalves.cursomc.domain.entity.Pagamento;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,7 +20,7 @@ public class PedidoModel {
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private OffsetDateTime instante;
 
-    private Pagamento pagamento;
+    private PagamentoModel pagamento;
 
     private Cliente cliente;
 
