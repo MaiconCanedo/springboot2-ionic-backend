@@ -8,6 +8,7 @@ import com.nelioalves.cursomc.domain.exception.ObjectNotFoundException;
 import com.nelioalves.cursomc.domain.service.ProdutoService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -36,17 +37,21 @@ public class ProdutoServiceImpl implements ProdutoService {
         return produtos;
     }
 
-    public Page<Produto> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
-        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
-        Page<Produto> produtos = repository.findAll(pageRequest);
-        if (produtos.getContent().isEmpty()) throw new ObjectNotFoundException("Nenhum objeto foi encontrado! Tipo: " + Produto.class.getName());
+    public Page<Produto> findPage(Pageable pageable) {
+        Page<Produto> produtos = repository.findAll(pageable);
+
+        if (produtos.getContent().isEmpty())
+            throw new ObjectNotFoundException("Nenhum objeto foi encontrado! Tipo: " + Produto.class.getName());
+
         return produtos;
     }
 
-    public Page<ProdutoModel> search(String nome, List<Integer> ids, Integer page, Integer linesPerPage, String orderBy, String direction) {
-        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
-        Page<Produto> produtos = repository.findDistinctByNomeContainingIgnoreCaseAndCategoriasIn(nome, categoriaRepository.findAllById(ids), pageRequest);
-        if (produtos.getContent().isEmpty()) throw new ObjectNotFoundException("Nenhum objeto foi encontrado! Tipo: " + Produto.class.getName());
+    public Page<ProdutoModel> search(String nome, List<Integer> ids, Pageable pageable) {
+        Page<Produto> produtos = repository.findDistinctByNomeContainingIgnoreCaseAndCategoriasIn(nome, categoriaRepository.findAllById(ids), pageable);
+
+        if (produtos.getContent().isEmpty())
+            throw new ObjectNotFoundException("Nenhum objeto foi encontrado! Tipo: " + Produto.class.getName());
+
         return produtos.map(produto -> new ProdutoModel(produto));
     }
 }
