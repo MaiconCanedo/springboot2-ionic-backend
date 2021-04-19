@@ -53,7 +53,7 @@ public class Produto {
     }
 
     @PrePersist
-    public void prePersist() {
+    private void prePersist() {
         this.codigo = UUID.randomUUID().toString();
     }
 }
