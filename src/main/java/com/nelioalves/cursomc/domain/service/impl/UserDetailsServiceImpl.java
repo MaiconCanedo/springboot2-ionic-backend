@@ -1,4 +1,4 @@
-package com.nelioalves.cursomc.domain.service;
+package com.nelioalves.cursomc.domain.service.impl;
 
 import com.nelioalves.cursomc.domain.entity.Cliente;
 import com.nelioalves.cursomc.domain.repository.ClienteRepository;

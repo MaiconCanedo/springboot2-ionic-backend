@@ -1,4 +1,4 @@
-package com.nelioalves.cursomc.domain.service;
+package com.nelioalves.cursomc.domain.service.impl;
 
 import com.nelioalves.cursomc.domain.entity.Cliente;
 import com.nelioalves.cursomc.domain.entity.Endereco;
@@ -11,6 +11,7 @@ import com.nelioalves.cursomc.core.security.UserSS;
 import com.nelioalves.cursomc.domain.exception.AuthorizationException;
 import com.nelioalves.cursomc.domain.exception.DataIntegrityException;
 import com.nelioalves.cursomc.domain.exception.ObjectNotFoundException;
+import com.nelioalves.cursomc.domain.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;

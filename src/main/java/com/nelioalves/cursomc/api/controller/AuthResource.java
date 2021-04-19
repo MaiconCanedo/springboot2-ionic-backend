@@ -2,7 +2,7 @@ package com.nelioalves.cursomc.api.controller;
 
 import com.nelioalves.cursomc.api.model.EmailModel;
 import com.nelioalves.cursomc.core.security.JWTUtil;
-import com.nelioalves.cursomc.domain.service.AuthService;
+import com.nelioalves.cursomc.domain.service.impl.AuthService;
 import com.nelioalves.cursomc.domain.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

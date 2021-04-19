@@ -1,4 +1,4 @@
-package com.nelioalves.cursomc.domain.service;
+package com.nelioalves.cursomc.domain.service.impl;
 
 import com.nelioalves.cursomc.domain.entity.PagamentoComBoleto;
 import org.springframework.stereotype.Service;

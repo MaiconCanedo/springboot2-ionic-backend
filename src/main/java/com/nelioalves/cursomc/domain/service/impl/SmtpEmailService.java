@@ -1,5 +1,6 @@
-package com.nelioalves.cursomc.domain.service;
+package com.nelioalves.cursomc.domain.service.impl;
 
+import com.nelioalves.cursomc.domain.service.AbstractEmailService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

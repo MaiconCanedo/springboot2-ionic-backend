@@ -1,4 +1,4 @@
-package com.nelioalves.cursomc.domain.service;
+package com.nelioalves.cursomc.domain.service.impl;
 
 import com.nelioalves.cursomc.domain.entity.ItemPedido;
 import com.nelioalves.cursomc.domain.entity.PagamentoComBoleto;
@@ -10,6 +10,8 @@ import com.nelioalves.cursomc.domain.repository.PedidoRepository;
 import com.nelioalves.cursomc.core.security.UserSS;
 import com.nelioalves.cursomc.domain.exception.AuthorizationException;
 import com.nelioalves.cursomc.domain.exception.ObjectNotFoundException;
+import com.nelioalves.cursomc.domain.service.EmailService;
+import com.nelioalves.cursomc.domain.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -34,7 +36,7 @@ public class PedidoService {
     private PagamentoRepository pagamentoRepository;
 
     @Autowired
-    private ProdutoService produtoService;
+    private ProdutoServiceImpl produtoServiceImpl;
 
     @Autowired
     private ItemPedidoRepository itemPedidoRepository;
@@ -79,7 +81,7 @@ public class PedidoService {
         pagamentoRepository.save(pedido.getPagamento());
         for (ItemPedido item : pedido.getItens()) {
             item.setDesconto(0.0);
-            item.setProduto(produtoService.find(item.getProduto().getId()));
+            item.setProduto(produtoServiceImpl.find(item.getProduto().getId()));
             item.setPreco(item.getProduto().getPreco());
             item.setPedido(pedido);
         }

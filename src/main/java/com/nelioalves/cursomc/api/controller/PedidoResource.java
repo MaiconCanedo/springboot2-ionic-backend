@@ -1,7 +1,7 @@
 package com.nelioalves.cursomc.api.controller;
 
 import com.nelioalves.cursomc.domain.entity.Pedido;
-import com.nelioalves.cursomc.domain.service.PedidoService;
+import com.nelioalves.cursomc.domain.service.impl.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;

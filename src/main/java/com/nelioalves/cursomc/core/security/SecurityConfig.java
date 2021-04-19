@@ -1,9 +1,6 @@
 package com.nelioalves.cursomc.core.security;
 
-import com.nelioalves.cursomc.core.security.JWTAuthenticationFilter;
-import com.nelioalves.cursomc.core.security.JWTAuthorizationFilter;
-import com.nelioalves.cursomc.core.security.JWTUtil;
-import com.nelioalves.cursomc.domain.service.UserDetailsServiceImpl;
+import com.nelioalves.cursomc.domain.service.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

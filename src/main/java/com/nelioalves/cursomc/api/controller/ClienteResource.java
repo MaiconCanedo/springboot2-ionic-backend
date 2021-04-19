@@ -3,7 +3,7 @@ package com.nelioalves.cursomc.api.controller;
 import com.nelioalves.cursomc.domain.entity.Cliente;
 import com.nelioalves.cursomc.api.model.ClienteModel;
 import com.nelioalves.cursomc.api.model.input.ClienteInput;
-import com.nelioalves.cursomc.domain.service.ClienteService;
+import com.nelioalves.cursomc.domain.service.impl.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
