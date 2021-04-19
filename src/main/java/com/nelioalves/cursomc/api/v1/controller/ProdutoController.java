@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static org.springframework.data.domain.Sort.Direction.ASC;
-
 @RestController
 @RequestMapping(value = "api/v1/produtos")
 public class ProdutoController {

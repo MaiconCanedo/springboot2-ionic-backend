@@ -11,7 +11,11 @@ public interface ProdutoService {
 
     Optional<Produto> find(String codigo);
 
+    Optional<Produto> find(Integer id);
+
     Produto findOrFail(String codigo);
+
+    Produto findOrFail(Integer id);
 
     Page<Produto> findAll(Pageable pageable);
 

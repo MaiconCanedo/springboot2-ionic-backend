@@ -27,9 +27,18 @@ public class ProdutoServiceImpl implements ProdutoService {
         return repository.findByCodigo(codigo);
     }
 
+    public Optional<Produto> find(Integer id) {
+        return repository.findById(id);
+    }
+
     public Produto findOrFail(String codigo) {
         return find(codigo)
                 .orElseThrow(() -> new ProdutoNotFoundException(codigo));
+    }
+
+    public Produto findOrFail(Integer id) {
+        return find(id)
+                .orElseThrow(() -> new ProdutoNotFoundException(id));
     }
 
     public Page<Produto> findAll(Pageable pageable) {
