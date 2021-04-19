@@ -11,10 +11,15 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.Arrays;
+import java.util.Collections;
 
 @Service
 public class DBService {
+
+    private static final ZoneOffset SAO_PAULO_OFFSET = ZoneOffset.of("-03:00");
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
@@ -112,14 +117,13 @@ public class DBService {
         clienteRepository.saveAll(Arrays.asList(cliente1, cliente2));
         enderecoRepository.saveAll(Arrays.asList(endereco1, endereco2, endereco3));
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        Pedido pedido1 = new Pedido(dateFormat.parse("30/09/2017 10:32"), cliente1, endereco1);
-        Pedido pedido2 = new Pedido(dateFormat.parse("10/10/2017 19:35"), cliente1, endereco2);
+        var pedido1 = new Pedido(OffsetDateTime.of(2017, 9, 30, 10, 32, 0, 0, SAO_PAULO_OFFSET), cliente1, endereco1);
+        var pedido2 = new Pedido(OffsetDateTime.of(2017, 10, 10, 19, 35, 0, 0, SAO_PAULO_OFFSET), cliente1, endereco2);
 
-        Pagamento pagamento1 = new PagamentoComCartao(EstadoPagamento.QUITADO, pedido1, 6);
+        var pagamento1 = new PagamentoComCartao(EstadoPagamento.QUITADO, pedido1, 6);
         pedido1.setPagamento(pagamento1);
 
-        Pagamento pagamento2 = new PagamentoComBoleto(EstadoPagamento.PENDENTE, pedido2, dateFormat.parse("20/10/2017 00:00"), null);
+        var pagamento2 = new PagamentoComBoleto(EstadoPagamento.PENDENTE, pedido2, OffsetDateTime.of(2017, 10, 20, 0, 0, 0, 0, SAO_PAULO_OFFSET), null);
         pedido2.setPagamento(pagamento2);
 
         cliente1.getPedidos().addAll(Arrays.asList(pedido1, pedido2));
@@ -132,7 +136,7 @@ public class DBService {
         ItemPedido itemPedido3 = new ItemPedido(pedido2, produto2, 100.00, 1, 800.00);
 
         pedido1.getItens().addAll(Arrays.asList(itemPedido1, itemPedido2));
-        pedido2.getItens().addAll(Arrays.asList(itemPedido3));
+        pedido2.getItens().addAll(Collections.singletonList(itemPedido3));
 
         produto1.getItens().add(itemPedido1);
         produto2.getItens().add(itemPedido3);

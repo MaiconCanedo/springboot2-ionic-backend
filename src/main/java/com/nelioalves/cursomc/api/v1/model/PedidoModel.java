@@ -8,9 +8,7 @@ import com.nelioalves.cursomc.domain.entity.Pagamento;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
 import java.time.OffsetDateTime;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,7 +16,7 @@ import java.util.Set;
 @Setter
 public class PedidoModel {
 
-    private Integer id;
+    private String id;
 
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private OffsetDateTime instante;

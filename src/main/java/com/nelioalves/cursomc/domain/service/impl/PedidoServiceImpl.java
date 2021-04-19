@@ -1,6 +1,5 @@
 package com.nelioalves.cursomc.domain.service.impl;
 
-import com.nelioalves.cursomc.core.security.UserSecurityService;
 import com.nelioalves.cursomc.domain.entity.ItemPedido;
 import com.nelioalves.cursomc.domain.entity.PagamentoComBoleto;
 import com.nelioalves.cursomc.domain.entity.Pedido;
@@ -54,7 +53,7 @@ public class PedidoServiceImpl implements PedidoService {
     }
 
     public Pedido findOrFail(Integer id) {
-        return  find(id)
+        return find(id)
                 .orElseThrow(() -> new NotFoundException("Objeto não encontrado! Id: " + id + ", Tipo: " + Pedido.class.getName()));
     }
 
@@ -72,7 +71,6 @@ public class PedidoServiceImpl implements PedidoService {
 
     @Transactional
     public Pedido save(Pedido pedido) {
-        pedido.setId(null);
         pedido.setCliente(clienteService.find(pedido.getCliente().getId()));
         pedido.getPagamento().setEstado(EstadoPagamento.PENDENTE);
         pedido.getPagamento().setPedido(pedido);
