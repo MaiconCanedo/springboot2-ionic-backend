@@ -1,13 +1,13 @@
 package com.nelioalves.cursomc.api.controller;
 
-import com.nelioalves.cursomc.domain.entity.Produto;
-import com.nelioalves.cursomc.api.model.ProdutoModel;
 import com.nelioalves.cursomc.api.controller.utils.URL;
+import com.nelioalves.cursomc.api.model.ProdutoModel;
+import com.nelioalves.cursomc.domain.entity.Produto;
 import com.nelioalves.cursomc.domain.service.ProdutoService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,7 +21,7 @@ public class ProdutoResource {
         this.service = service;
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/{id}")
     public ResponseEntity<Produto> find(Integer id) {
         return ResponseEntity.ok(service.find(id));
     }
@@ -35,7 +35,7 @@ public class ProdutoResource {
         return ResponseEntity.ok(service.findPage(page, linesPerPage, orderBy, direction));
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping
     public ResponseEntity<Page<ProdutoModel>> search(
             @RequestParam(value = "nome", defaultValue = "") String nome,
             @RequestParam(value = "categorias", defaultValue = "") String categorias,
