@@ -24,10 +24,15 @@ public class Produto {
 
     private String nome;
 
+    @Column(scale = 10, precision = 2)
     private Double preco;
 
     @ManyToMany
-    @JoinTable(name = "produto_categoria", joinColumns = @JoinColumn(name = "produto_id"), inverseJoinColumns = @JoinColumn(name = "categoria_id"))
+    @JoinTable(
+            name = "produto_categoria",
+            joinColumns = @JoinColumn(name = "produto_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "produto_fk"), nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "categoria_id", referencedColumnName = "id" ,foreignKey = @ForeignKey(name = "categoria_fk"), nullable = false)
+    )
     private List<Categoria> categorias = new ArrayList<>();
 
     @OneToMany(mappedBy = "id.pedido")
