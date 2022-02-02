@@ -21,7 +21,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <postgresql.version>42.2.19</postgresql.version>
+        <postgresql.version>42.2.25</postgresql.version>
         <jjwt.version>0.9.1</jjwt.version>
         <java.version>14</java.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
